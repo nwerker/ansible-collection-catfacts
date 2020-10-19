@@ -61,6 +61,7 @@ message:
 '''
 from ansible.module_utils.basic import *
 from ansible.module_utils.urls import *
+import random
 
 def get_fact(url, validate_cert):
     headers = {}
