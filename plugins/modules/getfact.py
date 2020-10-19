@@ -81,7 +81,7 @@ def run_module():
     result = dict(
         changed=False,
         original_message='',
-        message=''
+        message='',
 	cat_fact=''
     )
 
@@ -91,19 +91,24 @@ def run_module():
         supports_check_mode=True
     )
 
+    cat_fact = ''
+
 
     if module.check_mode:
         module.exit_json(**result)
 
-    if module.params['source'] == 1:
+    if module.params['source'] == '1':
         response = get_fact('https://cat-fact.herokuapp.com/facts',  module.params['validate_cert'])
         data = json.loads(response.read().decode('utf-8'))['all']
         cat_fact = data[random.randint(0, len(data))]['text']
-    elif module.params['source'] == 2:
+    elif module.params['source'] == '2':
         response = get_fact('https://catfact.ninja/fact', module.params['validate_cert'])
         cat_fact = json.loads(response.read().decode('utf-8'))['fact']
+    else:
+        module.fail_json(msg='Source does not fit requirements!', **result)
+    
+    result['cat_fact'] = cat_fact
 
-    result['cat_fact']  = cat_fact
 
     # Result should always be changed
     result['changed'] = True
