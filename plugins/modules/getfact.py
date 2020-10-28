@@ -37,13 +37,13 @@ author:
 '''
 
 EXAMPLES = '''
-# Get a random cat fact from default source 
-- name: 
+# Get a random cat fact from default source
+- name:
   getfact:
   register: acatfact
 
-# Get a random cat fact from specific source 
-- name: 
+# Get a random cat fact from specific source
+- name:
   getfact:
     source: 2
   register: acatfact
@@ -106,7 +106,7 @@ def run_module():
         cat_fact = json.loads(response.read().decode('utf-8'))['fact']
     else:
         module.fail_json(msg='Source does not fit requirements!', **result)
-    
+
     result['cat_fact'] = cat_fact
 
 
