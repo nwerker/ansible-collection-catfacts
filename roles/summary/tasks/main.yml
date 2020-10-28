@@ -1,0 +1,18 @@
+---
+- name: "Gather catfact from Source 1"
+  nwerker.catfacts.getfact:
+    source: '1'
+  register: my_cat_fact1
+
+- name: "Debug Print catfact 1"
+  debug:
+    var: my_cat_fact1
+
+- name: "Gather catfact from Source 2"
+  nwerker.catfacts.getfact:
+    source: '2'
+  register: my_cat_fact2
+
+- name: "Debug Print catfact 2"
+  debug:
+    var: my_cat_fact2

@@ -1,1 +1,3 @@
-# ansible-collection-catfacts
+# Ansible Collection - nwerker.catfacts
+
+Documentation for the collection.
