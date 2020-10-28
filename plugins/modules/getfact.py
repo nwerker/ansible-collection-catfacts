@@ -33,7 +33,7 @@ options:
         default: True
 
 author:
-    - Niklas Werker
+    - Niklas Werker (nwerker)
 '''
 
 EXAMPLES = '''
