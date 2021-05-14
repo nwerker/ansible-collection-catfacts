@@ -1,4 +1,8 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# Copyright: (c) 2018, Terry Jones <terry.jones@example.org>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 ANSIBLE_METADATA = {
     'metadata_version': '1.0',
@@ -6,37 +10,33 @@ ANSIBLE_METADATA = {
     'supported_by': 'community'
 }
 
-DOCUMENTATION = '''
+DOCUMENTATION = r'''
 ---
 module: getfact
-
 short_description: This module gets a random cat fact from your favourite cat fact api
-
-version_added: "2.10"
-
+version_added: "2.10.0"
 description:
     - "This module gets a random cat fact from your favourite cat fact api"
-
 options:
-    source:
-        description:
-            - From which API should the fact be gathered?
-        required: false
-        choices: 1, 2
-        default: "1"
+  source:
+    description:
+        - From which API should the fact be gathered?
+    type: str
+    required: false
+    choices: [ 1, 2 ]
+    default: 1
 
-    validate_certs:
-        description:
-            - Wether or not SSL certificates should be validated
-        required: false
-        choices: False, True
-        default: True
-
+  validate_certs:
+    description:
+        - Wether or not SSL certificates should be validated
+    type: bool
+    required: false
+    default: true
 author:
-    - Niklas Werker (nwerker)
+- Niklas Werker (@nwerker)
 '''
 
-EXAMPLES = '''
+EXAMPLES = r'''
 # Get a random cat fact from default source
 - name:
   getfact:
@@ -49,15 +49,15 @@ EXAMPLES = '''
   register: acatfact
 '''
 
-RETURN = '''
+RETURN = r'''
 original_message:
-    description: The original name param that was passed in
-    type: str
-    returned: always
+  description: The original name param that was passed in
+  type: str
+  returned: always
 message:
-    description: The output message that the test module generates
-    type: str
-    returned: always
+  description: The output message that the test module generates
+  type: str
+  returned: always
 '''
 from ansible.module_utils.basic import *
 from ansible.module_utils.urls import *
@@ -75,7 +75,7 @@ def run_module():
     # define available arguments/parameters a user can pass to the module
     module_args = dict(
         source=dict(type='str', required=False, default='1', choices=['1', '2']),
-        validate_cert=dict(type='bool', required=False, default=True)
+        validate_certs=dict(type='bool', required=False, default=True)
     )
 
     result = dict(
