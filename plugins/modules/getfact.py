@@ -98,9 +98,9 @@ def run_module():
         module.exit_json(**result)
 
     if module.params['source'] == '1':
-        response = get_fact('https://cat-fact.herokuapp.com/facts',  module.params['validate_cert'])
-        data = json.loads(response.read().decode('utf-8'))['all']
-        cat_fact = data[random.randint(0, len(data))]['text']
+        response = get_fact('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1',  module.params['validate_cert'])
+        data = json.loads(response.read().decode('utf-8'))
+        cat_fact = data['text']
     elif module.params['source'] == '2':
         response = get_fact('https://catfact.ninja/fact', module.params['validate_cert'])
         cat_fact = json.loads(response.read().decode('utf-8'))['fact']
