@@ -63,11 +63,11 @@ from ansible.module_utils.basic import *
 from ansible.module_utils.urls import *
 import random
 
-def get_fact(url, validate_cert):
+def get_fact(url, validate_certs):
     headers = {}
     headers['accept'] = '*/*'
 
-    response = open_url(url, headers=headers, method="GET", validate_certs=validate_cert)
+    response = open_url(url, headers=headers, method="GET", validate_certs=validate_certs)
 
     return response
 
@@ -98,11 +98,11 @@ def run_module():
         module.exit_json(**result)
 
     if module.params['source'] == '1':
-        response = get_fact('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1',  module.params['validate_cert'])
+        response = get_fact('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1',  module.params['validate_certs'])
         data = json.loads(response.read().decode('utf-8'))
         cat_fact = data['text']
     elif module.params['source'] == '2':
-        response = get_fact('https://catfact.ninja/fact', module.params['validate_cert'])
+        response = get_fact('https://catfact.ninja/fact', module.params['validate_certs'])
         cat_fact = json.loads(response.read().decode('utf-8'))['fact']
     else:
         module.fail_json(msg='Source does not fit requirements!', **result)
